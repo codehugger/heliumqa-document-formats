@@ -18,7 +18,7 @@ When going through a formal schema to try and figure out how it works there is n
 
 Instead of lazily just using `name`, we should try state the purpose explicitly in the variable name. A good example of this is a person. A person certainly has a name but before using name think about this. Am I 100% sure that I will never refer to `full_name`, `first_name` or `last_name`? Because if you are not 100% sure you might end up adding attributes creating an ambiguous context where `name` might mean the `full_name` or .
 
-As you can see, the variable name `name` can usually be stated more explicitly like `first_name` or a `last_name`. However, don't overthink it and remember that keep-it-simple-stupid (KISS) be considered first.
+As you can see, the variable name `name` can usually be stated more explicitly like `first_name` or a `last_name`. However, don't overthink it and remember that keep-it-simple-stupid (KISS) should always be considered first.
 
 ### We use snake_case
 
@@ -27,6 +27,14 @@ The most widely used are snake_case, camelCase and PascalCase. Some languages us
 In this document and in the schema described within we use snake_case. This is for two simple and very opinionated reasons. Readability and ease-of-use. The snake_case naming convention is unique in a way that it has *built_in_white_spacing* which allows for quicker read-throughs. It also eliminates the need to memorize what is uppercase and what should be lowercase.
 
 Just to be clear, **snake_case** is not considered to be better than any other naming convention and they can all be argued in the same way. The choice of a naming convention just has to be made and for the most part it is a pure matter of taste and familiarity.
+
+## KISS & DRY
+
+The "Keep it simple, stupid" (KISS) principle states that most systems work best if they are kept simple rather than made complicated; therefore simplicity should be a key goal in design and unnecessary complexity should be avoided.
+
+The "Don't repeat yourself" (DRY) principle is stated as "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system".
+
+The above principles are simple and applying them rigorously when designing usually results in a simple, beautiful and maintainable end product.
 
 ## Document Structure
 
