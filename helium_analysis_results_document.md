@@ -22,7 +22,7 @@ As you can see, the variable name `name` can usually be stated more explicitly l
 
 ### We use snake_case
 
-The most widely used are snake_case, camelCase and PascalCase. Some languages use uppercase letters to signal an export and in some languages prefix names with underscore (e.g. `_reserved`) to signal something that should not be used.
+The most widely used are [snake_case](https://en.wikipedia.org/wiki/Snake_case), camelCase and PascalCase. Some languages use uppercase letters to signal an export and in some languages prefix names with underscore (e.g. `_reserved`) to signal something that should not be used.
 
 In this document and in the schema described within we use snake_case. This is for two simple and very opinionated reasons. Readability and ease-of-use. The snake_case naming convention is unique in a way that it has *built_in_white_spacing* which allows for quicker read-throughs. It also eliminates the need to memorize what is uppercase and what should be lowercase.
 
