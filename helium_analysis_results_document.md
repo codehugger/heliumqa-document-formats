@@ -44,6 +44,8 @@ The object "analysis object" **MUST** contain __at least one__ of the following 
 
 * `results`: the set of results returned from processing
 * `errors`: an array of error objects
+* `warnings`: an array of warning objects
+* `notes`: an array of note objects
 
 For example, the following analysis contains a single analyzed result:
 
@@ -240,9 +242,8 @@ The `table_rows` member can contain any number of "rows" but each row **MUST** b
 
 Additionally a "table result object" **MAY** contain the following members:
 
-* `table_transpose`: a boolean value indicating whether this table is transposed
-* `table_row_headers`: a boolean value indicating that the first column of each row should be treated like a header value.
-* `table_summaries`: an array of summary objects
+* `table_transpose`: a boolean value indicating whether this table is transposed (default: false)
+* `table_row_headers`: a boolean value indicating that the first column of each row should be treated like a header value (default: false)
 
 Below is a basic example of a table with two columns and two rows.
 
@@ -257,15 +258,7 @@ Below is a basic example of a table with two columns and two rows.
         "table_rows": [
             [1, 2],
             [2, 3]
-        ],
-        "table_summaries": [{
-            "key": "avg",
-            "label": "Average",
-            "column_values": {
-                "column_a": 1.5,
-                "column_b": 2.5
-            }
-        }]
+        ]
     }]
 }
 ```
@@ -280,50 +273,8 @@ A "table column object" **MUST** contain the following members:
 
 A table column **MAY** additionally define any of the following members:
 
-* `context`: a string describing how the column relates to other columns in the table if the values contained within the column are not concrete values
-* `label`: a string that **SHOULD** typically contain a more human-readable alternative to `key`.
-
-The value of the `context` member **MUST** be one of the following:
-
-* `metadata`: the values in this column are considered important context for other columns but can not stand on their own
-* `trivial`: the values in this column are considered unimportant context for other columns and can not stand on their own
-
-##### Summarizing Columns
-
-A "table summary object" is a special object that defines a summary  for a column. A summary object **MUST** include the following members:
-
-* `key`: the key of the summary value that **MUST** be in snake_case format
-* `values`: an object where each member defined must match a key in `table_columns`
-
-Values of members in `values` **MUST NOT** be arrays or objects. The set of members is always less than or equal to the length `table_columns`.
-
-* `label`: a string that **SHOULD** typically contain a more human-readable alternative to `key`.
-
-The following shows a table with a summary that contains column averages:
-
-```json
-{
-    "results": [{
-        "type": "table",
-        "table_columns": [
-            { "key": "column_a", "context": "metadata" },
-            { "key": "column_b" }
-        ],
-        "table_rows": [
-            [1, 2],
-            [2, 3]
-        ],
-        "table_summaries": [{
-            "key": "avg",
-            "label": "Average",
-            "column_values": {
-                "column_a": 1.5,
-                "column_b": 2.5
-            }
-        }]
-    }]
-}
-```
+* `label`: a string that **SHOULD** typically contain a more human-readable alternative to `key` (default: same as `key`)
+* `metadata`: a bool value that indicates whether this column contains metadata or concrete values (default: false)
 
 #### chart2d
 
@@ -423,7 +374,7 @@ An "error object" **MUST** contain the following members:
 
 In addition the "error object" **MAY** also include the following standard members:
 
-* `detail`: a string used to the error in more detail
+* `details`: a string used to the error in more detail
 
 Additionally the "error object" **MAY** define any non-standard member that provides further details.
 
@@ -445,6 +396,82 @@ The following shows an error on an individual "result object":
         "key": "my_variable",
         "type": "text",
         "errors": [{
+            "message": "Something went wrong when processing this result ..."
+        }]
+    }]
+}
+```
+
+### Warnings
+
+The "warning object" can be included at top-level or as a part of a "result object".
+
+An "warning object" **MUST** contain the following members:
+
+* `message`: a string describing the warning that occurred
+
+In addition the "warning object" **MAY** also include the following standard members:
+
+* `details`: a string used to the warning in more detail
+
+Additionally the "warning object" **MAY** define any non-standard member that provides further details.
+
+The following shows an warning on top-level for the analysis:
+
+```json
+{
+    "warnings": [{
+        "message": "Something happened that concerns the analysis ..."
+    }]
+}
+```
+
+The following shows a warning on an individual "result object":
+
+```json
+{
+    "results": [{
+        "key": "my_variable",
+        "type": "text",
+        "warnings": [{
+            "message": "Something was skipped when processing this result ..."
+        }]
+    }]
+}
+```
+
+### Notes
+
+The "note object" can be included at top-level or as a part of a "result object".
+
+An "note object" **MUST** contain the following members:
+
+* `message`: a string describing the note that accompanies the analysis or result
+
+In addition the "note object" **MAY** also include the following standard members:
+
+* `details`: a string used to describe the note in more detail
+
+Additionally the "note object" **MAY** define any non-standard member that provides further details.
+
+The following shows a note on top-level for the analysis:
+
+```json
+{
+    "notes": [{
+        "message": "Something went wrong with the analysis ..."
+    }]
+}
+```
+
+The following shows a note on an individual "result object":
+
+```json
+{
+    "results": [{
+        "key": "my_variable",
+        "type": "text",
+        "notes": [{
             "message": "Something went wrong when processing this result ..."
         }]
     }]
