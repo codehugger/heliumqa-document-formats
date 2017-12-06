@@ -108,8 +108,8 @@ A "result object" has a `type` member that **MUST** be one of the following:
 
 * `text`: a single value text result
 * `numeric`: a single value numeric result
-* `boolean`: a single boolean result
-* `table`: a tabular data result with or without headers 
+* `pass_fail`: a single pass/fail result with a message
+* `table`: a tabular data result with or without headers
 * `chart2d`: a two-dimensional chart with one or more series
 * `file`: a result containing a Base64 encoded file
 
@@ -191,26 +191,23 @@ The following defines a basic numeric result:
 }
 ```
 
-#### bool
+#### pass_fail
 
-The "bool" result type defines a single boolean (true/false) result as defined [here](http://json.org).
+The "pass/fail" result type defines a pass/fail (true/false) result with a message.
 
-A "boolean result object" **MUST** contain the following members at top-level:
+A "pass/fail result object" **MUST** contain the following members at top-level:
 
-* `bool_value`: the boolean value of the result
+* `passes`: the pass/fail value of the result
+* `message`: a text describing what passes or fails
 
-It **MAY** also include any the following members:
-
-* `message`: a text describing the boolean value in more detail
-
-The following defines a basic boolean result with a message:
+The following defines a basic pass/failresult with a message:
 
 ```json
 {
     "results": [{
         "key": "my_variable",
-        "type": "bool",
-        "boolean_value": true,
+        "type": "pass_fail",
+        "passes": true,
         "message": "All checks are go!"
     }]
 }
