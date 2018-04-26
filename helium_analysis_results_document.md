@@ -249,7 +249,7 @@ Below is a basic example of a table with two columns and two rows.
     "results": [{
         "type": "table",
         "table_columns": [
-            { "key": "column_a", "context": "metadata" },
+            { "key": "column_a", "metadata": true },
             { "key": "column_b" }
         ],
         "table_rows": [
