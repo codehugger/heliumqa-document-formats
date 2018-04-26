@@ -273,6 +273,13 @@ A table column **MAY** additionally define any of the following members:
 * `label`: a string that **SHOULD** typically contain a more human-readable alternative to `key` (default: same as `key`)
 * `metadata`: a bool value that indicates whether this column contains metadata or concrete values (default: false)
 
+##### Displaying Tables
+
+Sometimes you might want to display table data differently from its defined *columns as keys* and *rows as values*. You might also want to hide the table because its meaning should be kept for longitudinal purposes but it should not be displayed by default. For this purpose a table **MAY** include the following members:
+
+* `transpose`: a boolean that indicates whether this table should be displayed as transposed or not (default: false)
+* `hide`: a boolean value that indicates whether this table should be hidden by default (default: false)
+
 #### chart2d
 
 A "chart result object" defines a multi-value structure that describes a mathematical 2D chart. 
